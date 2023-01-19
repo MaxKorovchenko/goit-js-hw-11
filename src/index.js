@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Notiflix from 'notiflix';
-import simpleLightbox from 'simplelightbox';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const form = document.querySelector('.search-form');
 const input = document.querySelector('input');
@@ -8,7 +9,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 const gallery = document.querySelector('.gallery');
 
 let page = 1;
-let per_page = 4;
+const per_page = 4;
 loadMoreBtn.hidden = true;
 
 form.addEventListener('submit', onFormSubmit);
@@ -29,8 +30,9 @@ async function onFormSubmit(e) {
       Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
     }
 
-    console.log(data);
     renderImages(data.hits);
+
+    lightbox = new SimpleLightbox('.gallery a');
   } catch (error) {
     console.log(error.message);
   }
@@ -41,9 +43,12 @@ async function onFormSubmit(e) {
 async function onLoadMoreBtnClick() {
   try {
     page += 1;
+    lightbox.destroy();
 
     const data = await fetchImages();
     renderImages(data.hits);
+
+    lightbox = new SimpleLightbox('.gallery a').refresh();
 
     if (per_page * page >= data.totalHits) {
       Notiflix.Notify.info(
@@ -70,24 +75,27 @@ async function fetchImages() {
 function renderImages(data) {
   const markup = data
     .map(
-      ({ webformatURL, tags, likes, views, comments, downloads }) => `
-      <div class="photo-card">
-      <img src="${webformatURL}" alt="${tags}" loading="lazy" width="160"/>
-      <div class="info">
-        <p class="info-item">
-          <b>Likes: ${likes}</b>
-        </p>
-        <p class="info-item">
-          <b>Views: ${views}</b>
-        </p>
-        <p class="info-item">
-          <b>Comments: ${comments}</b>
-        </p>
-        <p class="info-item">
-          <b>Downloads: ${downloads}</b>
-        </p>
-      </div>
-    </div>`
+      ({
+        largeImageURL,
+        webformatURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => `
+      <a class="gallery__link" href="${largeImageURL}">
+        <div class="gallery__card">
+          <img class="gallery__image" src="${webformatURL}" alt="${tags}" loading="lazy" width="160"/>
+            <div class="info">
+              <p class="info__item"><b>Likes ${likes}</b></p>
+              <p class="info__item"><b>Views ${views}</b></p>
+              <p class="info__item"><b>Comments ${comments}</b></p>
+              <p class="info__item"><b>Downloads ${downloads}</b></p>
+            </div>
+        </div>
+      </a>
+      `
     )
     .join('');
 
