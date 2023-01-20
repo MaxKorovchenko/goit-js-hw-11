@@ -11,6 +11,7 @@ const gallery = document.querySelector('.gallery');
 let page = 1;
 const per_page = 4;
 loadMoreBtn.hidden = true;
+const lightbox = new SimpleLightbox('.gallery a');
 
 form.addEventListener('submit', onFormSubmit);
 loadMoreBtn.addEventListener('click', onLoadMoreBtnClick);
@@ -32,7 +33,7 @@ async function onFormSubmit(e) {
 
     renderImages(data.hits);
 
-    lightbox = new SimpleLightbox('.gallery a');
+    lightbox.refresh();
   } catch (error) {
     console.log(error.message);
   }
@@ -43,12 +44,11 @@ async function onFormSubmit(e) {
 async function onLoadMoreBtnClick() {
   try {
     page += 1;
-    lightbox.destroy();
 
     const data = await fetchImages();
     renderImages(data.hits);
 
-    lightbox = new SimpleLightbox('.gallery a').refresh();
+    lightbox.refresh();
 
     if (per_page * page >= data.totalHits) {
       Notiflix.Notify.info(
