@@ -6,14 +6,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  padding: 10px;
+  gap: 10px;
   position: sticky;
   z-index: 1000;
   top: 0;
   left: 0;
-  padding: 20px;
-  background-color: rgb(78, 75, 75);
+  padding: 15px;
+  background-color: rgb(69, 73, 78);
 
   & > input {
     width: 30%;
@@ -22,13 +21,15 @@ body {
     border: none;
     padding: 10px 15px;
     text-align: center;
-    box-shadow: 4px 4px 5px 3px rgb(73, 92, 114);
+    box-shadow: 2px 2px 5px 3px rgb(233, 169, 162);
   }
 
   & > button {
     height: 30px;
     border-radius: 5px;
     border: none;
-    box-shadow: 4px 4px 5px 3px rgb(73, 92, 114);
+    background-color: rgb(191, 191, 183);
+    box-shadow: 1px 1px 5px 3px rgb(233, 169, 162);
+    cursor: pointer;
   }
 }

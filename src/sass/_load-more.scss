@@ -1,6 +1,6 @@
 .load-more {
   display: block;
-  margin: 30px auto 100px;
+  margin: 20px auto 50px;
   border: none;
   color: white;
   border-radius: 4px;
@@ -15,5 +15,9 @@
 
   &:hover {
     transform: scale(1.1);
+  }
+
+  &.is-hidden {
+    display: none;
   }
 }
