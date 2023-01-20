@@ -39,6 +39,14 @@ async function onFormSubmit(e) {
 
     renderImages(data.hits);
 
+    const { height: cardHeight } =
+      gallery.firstElementChild.getBoundingClientRect();
+
+    window.scrollBy({
+      top: -cardHeight * 9,
+      behavior: 'smooth',
+    });
+
     lightbox.refresh();
     loadMoreBtn.classList.remove('is-hidden');
   } catch (error) {
