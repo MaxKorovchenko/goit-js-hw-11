@@ -65,7 +65,7 @@ async function onLoadMoreBtnClick() {
 async function fetchImages() {
   const BASE_URL = 'https://pixabay.com/api/';
   const API_KEY = '32970845-e4fc8afb31274d73d690834b7';
-  const QUERY_PARAM = `q=${input.value}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${per_page}`;
+  const QUERY_PARAM = `q=${input.value}&image_type=photo&orientation=horizontal&safesearch=false&page=${page}&per_page=${per_page}`;
 
   const response = await axios.get(`${BASE_URL}?key=${API_KEY}&${QUERY_PARAM}`);
 
@@ -88,10 +88,10 @@ function renderImages(data) {
         <div class="gallery__card">
           <img class="gallery__image" src="${webformatURL}" alt="${tags}" loading="lazy" width="160"/>
             <div class="info">
-              <p class="info__item"><b>Likes ${likes}</b></p>
-              <p class="info__item"><b>Views ${views}</b></p>
-              <p class="info__item"><b>Comments ${comments}</b></p>
-              <p class="info__item"><b>Downloads ${downloads}</b></p>
+              <p class="info__item"><b><span>Likes</span> ${likes}</b></p>
+              <p class="info__item"><b><span>Views</span> ${views}</b></p>
+              <p class="info__item"><b><span>Comments</span> ${comments}</b></p>
+              <p class="info__item"><b><span>Downloads</span> ${downloads}</b></p>
             </div>
         </div>
       </a>

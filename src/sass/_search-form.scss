@@ -1,0 +1,34 @@
+body {
+  background-color: rgb(148, 156, 164);
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px;
+  position: sticky;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  background-color: rgb(78, 75, 75);
+
+  & > input {
+    width: 30%;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    box-shadow: 4px 4px 5px 3px rgb(73, 92, 114);
+  }
+
+  & > button {
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 4px 4px 5px 3px rgb(73, 92, 114);
+  }
+}
