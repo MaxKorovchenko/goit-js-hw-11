@@ -1,4 +1,4 @@
-import axios from 'axios';
+import fetchImages from './js/fetchImages';
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -7,9 +7,9 @@ const form = document.querySelector('.search-form');
 const loadMoreBtn = document.querySelector('.load-more');
 const gallery = document.querySelector('.gallery');
 
-let page = 1;
-let query = '';
-const per_page = 40;
+export let page = 1;
+export let query = '';
+export const per_page = 40;
 loadMoreBtn.classList.add('is-hidden');
 const lightbox = new SimpleLightbox('.gallery a');
 
@@ -81,16 +81,6 @@ async function onLoadMoreBtnClick() {
   } catch (error) {
     console.log(error.message);
   }
-}
-
-async function fetchImages() {
-  const BASE_URL = 'https://pixabay.com/api/';
-  const API_KEY = '32970845-e4fc8afb31274d73d690834b7';
-  const QUERY_PARAM = `q=${query}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${per_page}`;
-
-  const response = await axios.get(`${BASE_URL}?key=${API_KEY}&${QUERY_PARAM}`);
-
-  return response.data;
 }
 
 function renderImages(data) {
