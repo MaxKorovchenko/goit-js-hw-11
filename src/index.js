@@ -42,10 +42,26 @@ async function onFormSubmit(e) {
     const { height: cardHeight } =
       gallery.firstElementChild.getBoundingClientRect();
 
-    window.scrollBy({
-      top: -cardHeight * 9,
-      behavior: 'smooth',
-    });
+    if (window.innerWidth <= 767) {
+      window.scrollBy({
+        top: -cardHeight * 70,
+        behavior: 'smooth',
+      });
+    }
+
+    if (window.innerWidth < 1200 && window.innerWidth > 767) {
+      window.scrollBy({
+        top: -cardHeight * 20,
+        behavior: 'smooth',
+      });
+    }
+
+    if (window.innerWidth >= 1200) {
+      window.scrollBy({
+        top: -cardHeight * 9,
+        behavior: 'smooth',
+      });
+    }
 
     lightbox.refresh();
     loadMoreBtn.classList.remove('is-hidden');
@@ -97,7 +113,7 @@ function renderImages(data) {
       }) => `
       <a class="gallery__link" href="${largeImageURL}">
         <div class="gallery__card">
-          <img class="gallery__image" src="${webformatURL}" alt="${tags}" loading="lazy" width="160"/>
+          <img class="gallery__image" src="${webformatURL}" alt="${tags}" loading="lazy"/>
             <div class="info">
               <p class="info__item"><b><span>Likes</span> ${likes}</b></p>
               <p class="info__item"><b><span>Views</span> ${views}</b></p>

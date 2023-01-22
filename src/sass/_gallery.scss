@@ -1,11 +1,22 @@
 .gallery {
   display: flex;
   flex-wrap: wrap;
-
+  justify-content: center;
   gap: 30px;
-  margin: 0 auto;
-  padding: 30px;
-  width: 1400px;
+
+  max-width: 480px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media screen and (min-width: 768px) {
+    max-width: 768px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    max-width: 1400px;
+  }
 }
 
 .gallery__card {
@@ -24,7 +35,7 @@
 }
 
 .gallery__link {
-  flex-basis: calc((100% - 90px) / 4);
+  width: 90%;
   display: block;
   text-decoration: none;
   height: 100%;
@@ -37,6 +48,14 @@
   &:hover {
     cursor: zoom-in;
     transform: scale(1.03);
+  }
+
+  @media screen and (min-width: 768px) {
+    flex-basis: calc((100% - 30px) / 2);
+  }
+
+  @media screen and (min-width: 1200px) {
+    flex-basis: calc((100% - 90px) / 4);
   }
 }
 
