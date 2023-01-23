@@ -1,4 +1,5 @@
-import fetchImages from './js/fetchImages';
+import fetchImages from './js/fetch-images';
+import scrollToTop from './js/scroll-to-top';
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -12,6 +13,7 @@ export let query = '';
 export const per_page = 40;
 
 const lightbox = new SimpleLightbox('.gallery a');
+scrollToTop();
 
 form.addEventListener('submit', onFormSubmit);
 loadMoreBtn.addEventListener('click', onLoadMoreBtnClick);
