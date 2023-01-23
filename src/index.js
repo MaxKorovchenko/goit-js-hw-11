@@ -10,7 +10,7 @@ const gallery = document.querySelector('.gallery');
 export let page = 1;
 export let query = '';
 export const per_page = 40;
-loadMoreBtn.classList.add('is-hidden');
+
 const lightbox = new SimpleLightbox('.gallery a');
 
 form.addEventListener('submit', onFormSubmit);
@@ -21,6 +21,7 @@ async function onFormSubmit(e) {
     e.preventDefault();
     page = 1;
     query = e.currentTarget.searchQuery.value;
+    // loadMoreBtn.classList.add('is-hidden');
 
     const data = await fetchImages();
 
@@ -39,29 +40,7 @@ async function onFormSubmit(e) {
 
     renderImages(data.hits);
 
-    const { height: cardHeight } =
-      gallery.firstElementChild.getBoundingClientRect();
-
-    if (window.innerWidth <= 767) {
-      window.scrollBy({
-        top: -cardHeight * 70,
-        behavior: 'smooth',
-      });
-    }
-
-    if (window.innerWidth < 1200 && window.innerWidth > 767) {
-      window.scrollBy({
-        top: -cardHeight * 20,
-        behavior: 'smooth',
-      });
-    }
-
-    if (window.innerWidth >= 1200) {
-      window.scrollBy({
-        top: -cardHeight * 9,
-        behavior: 'smooth',
-      });
-    }
+    windowUpScrollBy();
 
     lightbox.refresh();
     loadMoreBtn.classList.remove('is-hidden');
@@ -84,14 +63,7 @@ async function onLoadMoreBtnClick() {
     }
 
     renderImages(data.hits);
-
-    const { height: cardHeight } =
-      gallery.firstElementChild.getBoundingClientRect();
-
-    window.scrollBy({
-      top: cardHeight * 2,
-      behavior: 'smooth',
-    });
+    windowDownScrollBy();
 
     lightbox.refresh();
   } catch (error) {
@@ -127,4 +99,40 @@ function renderImages(data) {
     .join('');
 
   gallery.insertAdjacentHTML('beforeend', markup);
+}
+
+function windowUpScrollBy() {
+  const { height: cardHeight } =
+    gallery.firstElementChild.getBoundingClientRect();
+
+  if (window.innerWidth <= 767) {
+    window.scrollBy({
+      top: -cardHeight * 70,
+      behavior: 'smooth',
+    });
+  }
+
+  if (window.innerWidth < 1200 && window.innerWidth > 767) {
+    window.scrollBy({
+      top: -cardHeight * 20,
+      behavior: 'smooth',
+    });
+  }
+
+  if (window.innerWidth >= 1200) {
+    window.scrollBy({
+      top: -cardHeight * 9,
+      behavior: 'smooth',
+    });
+  }
+}
+
+function windowDownScrollBy() {
+  const { height: cardHeight } =
+    gallery.firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
 }
