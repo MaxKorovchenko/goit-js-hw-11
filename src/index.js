@@ -10,7 +10,7 @@ const gallery = document.querySelector('.gallery');
 
 export let page = 1;
 export let query = '';
-export const per_page = 40;
+export const perPage = 40;
 
 const lightbox = new SimpleLightbox('.gallery a');
 scrollToTop();
@@ -56,7 +56,7 @@ async function onLoadMoreBtnClick() {
     page += 1;
 
     const data = await fetchImages();
-    if (per_page * page >= data.totalHits) {
+    if (perPage * page >= data.totalHits) {
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );
