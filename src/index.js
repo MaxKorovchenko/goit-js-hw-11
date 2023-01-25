@@ -42,7 +42,7 @@ async function onFormSubmit(e) {
 
     renderImages(data.hits);
 
-    windowUpScrollBy();
+    windowUpScrollTo();
 
     lightbox.refresh();
     loadMoreBtn.classList.remove('is-hidden');
@@ -103,30 +103,11 @@ function renderImages(data) {
   gallery.insertAdjacentHTML('beforeend', markup);
 }
 
-function windowUpScrollBy() {
-  const { height: cardHeight } =
-    gallery.firstElementChild.getBoundingClientRect();
-
-  if (window.innerWidth <= 767) {
-    window.scrollBy({
-      top: -cardHeight * 70,
-      behavior: 'smooth',
-    });
-  }
-
-  if (window.innerWidth < 1200 && window.innerWidth > 767) {
-    window.scrollBy({
-      top: -cardHeight * 20,
-      behavior: 'smooth',
-    });
-  }
-
-  if (window.innerWidth >= 1200) {
-    window.scrollBy({
-      top: -cardHeight * 9,
-      behavior: 'smooth',
-    });
-  }
+function windowUpScrollTo() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
 }
 
 function windowDownScrollBy() {
